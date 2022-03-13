@@ -51,10 +51,10 @@ bool update(float delta_time) {
   theta += pi<float>() * delta_time;
   // Check if key is pressed
   if (glfwGetKey(renderer::get_window(), GLFW_KEY_UP)) {
-    pos += vec3(0.0f, 0.0f, -5.0f) * delta_time;
+    pos += vec3(0.0f, 5.0f, 0.0f) * delta_time;
   }
   if (glfwGetKey(renderer::get_window(), GLFW_KEY_DOWN)) {
-    pos += vec3(0.0f, 0.0f, 5.0f) * delta_time;
+    pos += vec3(0.0f, -5.0f, 0.0f) * delta_time;
   }
   if (glfwGetKey(renderer::get_window(), GLFW_KEY_LEFT)) {
     pos += vec3(-5.0f, 0.0f, 0.0f) * delta_time;
@@ -74,11 +74,11 @@ bool render() {
   // *********************************
   // Create transformation matrices
   // ******************************
-
-
-
+  S = glm::scale(mat4(1.0f), vec3(s, s, s));
+  R = glm::rotate(mat4(1.0f), theta, vec3(0.0f, 0.0f, 1.0f));
+  T = glm::translate(mat4(1.0f), vec3(pos.x, pos.y, pos.z));
   // Combine matrices to set M - remember multiplication order
-
+  M = T * (R * S);
   // *********************************
   // Create MVP matrix
   auto V = cam.get_view();

@@ -53,7 +53,12 @@ bool render() {
   mat4 S;
   // *********************************
   // Create scale matrix - use uniform scale based on s
-
+  
+  //S[0] = vec4(s, 0, 0, 0);
+  //S[1] = vec4(0, s, 0, 0);
+  //S[2] = vec4(0, 0, s, 0);
+  //S[3] = vec4(0, 0, 0, 1);
+  S = glm::scale(mat4(1.0f), vec3(s, s, s));
   // *********************************
   // Create MVP matrix
   auto V = cam.get_view();

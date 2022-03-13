@@ -40,16 +40,22 @@ bool load_content() {
 bool update(float delta_time) {
   // Check if key is pressed
   if (glfwGetKey(renderer::get_window(), GLFW_KEY_UP)) {
-    pos += vec3(0.0f, 0.0f, -5.0f) * delta_time;
+    pos += vec3(0.0f, -5.0f, 0.0f) * delta_time;
   }
   if (glfwGetKey(renderer::get_window(), GLFW_KEY_DOWN)) {
-    pos += vec3(0.0f, 0.0f, 5.0f) * delta_time;
+    pos += vec3(0.0f, 5.0f, 0.0f) * delta_time;
   }
   if (glfwGetKey(renderer::get_window(), GLFW_KEY_LEFT)) {
     pos += vec3(-5.0f, 0.0f, 0.0f) * delta_time;
   }
   if (glfwGetKey(renderer::get_window(), GLFW_KEY_RIGHT)) {
     pos += vec3(5.0f, 0.0f, 0.0f) * delta_time;
+  }
+  if (glfwGetKey(renderer::get_window(), GLFW_KEY_O)) {
+      pos += vec3(0.0f, 0.0f, 5.0f) * delta_time;
+  }
+  if (glfwGetKey(renderer::get_window(), GLFW_KEY_P)) {
+      pos += vec3(0.0f, 0.0f, -5.0f) * delta_time;
   }
   // Update the camera
   cam.update(delta_time);
@@ -62,7 +68,7 @@ bool render() {
   mat4 T(1.0f);
   // *********************************
   // Create translation matrix - use pos vector
-
+  T = glm::translate(mat4(1.0f), vec3(pos.x, pos.y, pos.z));
   // *********************************
   // Create MVP matrix
   auto V = cam.get_view();

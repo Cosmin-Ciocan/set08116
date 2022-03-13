@@ -48,7 +48,13 @@ bool render() {
   mat4 R;
   // *********************************
   // Create rotation matrix - rotate around Z axis by theta
+  //R[0] = vec4(1, 0, 0, 0);
+  //R[1] = vec4(cos(theta), -sin(theta), 0.0f, 0.0f);
+  //R[2] = vec4(sin(theta), cos(theta), 0.0f, 0.0f);
+  //R[3] = vec4(0, 0, 0, 1);
 
+  //R = glm::rotate(R, theta, glm::vec3(1.0f, 0.0f, 0.0f));
+  R = glm::rotate(mat4(1.0f), theta, vec3(0.0f, 0.0f, 1.0f));
   // *********************************
   // Create MVP matrix
   auto V = cam.get_view();
